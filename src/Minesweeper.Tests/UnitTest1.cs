@@ -21,4 +21,12 @@ public class CellSpec
 
         ret.Should().BeOfType<One>();
     }
+
+    [Fact]
+    public void CreateMineField()
+    {
+        var sut = createMineField(3, 3);
+
+        sut.Cells.Count.Should().Be(9);
+    }
 }
