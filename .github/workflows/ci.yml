@@ -46,7 +46,7 @@ jobs:
       uses: EndBug/add-and-commit@v4
       with:
         add: 'docs/*'
-        message: "Coverage Report  ${{github.sha}}"
+        message: "Coverage Report ${{github.sha}}"
         ref: 'gh-pages' 
         remove: ''  
       if: ${{ github.ref == 'refs/heads/master' }}

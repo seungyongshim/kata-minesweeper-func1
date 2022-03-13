@@ -10,7 +10,7 @@ public class CellSpec
     [Theory, AutoMoqData]
     public void Covered(Covered cell)
     {
-        cell.ToString().Should().Be(".");
+        toString(cell).Should().Be(".");
     }
 
     [Fact]
@@ -28,5 +28,11 @@ public class CellSpec
         var sut = createMineField(3, 3);
 
         sut.Cells.Count.Should().Be(9);
+    }
+
+    [Theory, AutoData]
+    public void OneToString(One sut)
+    {
+        toString(sut).Should().Be("1");
     }
 }

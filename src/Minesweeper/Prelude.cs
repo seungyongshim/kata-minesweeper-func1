@@ -15,6 +15,21 @@ public static class Prelude
         _ => cell
     };
 
+    public static string toString(ICell cell) => cell switch
+    {
+        Covered => ".",
+        Zero => " ",
+        One => "1",
+        Two => "2",
+        Three => "3",
+        Four => "4",
+        Five => "5",
+        Six => "6",
+        Seven => "7",
+        Eight => "8",
+        Bomb => "*",
+    };
+
     public static MineField createMineField(int width, int height) =>
         new MineField(width, height, new Lst<ICell> (Enumerable.Repeat(new Zero(), width * height)));
 
@@ -48,3 +63,4 @@ public record Y(int Value)
 {
     public static implicit operator Y(int v) => new(v);
 }
+
