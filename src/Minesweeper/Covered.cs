@@ -1,6 +1,6 @@
-﻿namespace Minesweeper;
+namespace Minesweeper;
 
-public record Covered : ICell
+public record Covered(ICell? Inner = default) : ICell
 {
     public override string ToString() => ".";
 }

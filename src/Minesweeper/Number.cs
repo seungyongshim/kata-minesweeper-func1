@@ -1,4 +1,4 @@
-﻿namespace Minesweeper;
+namespace Minesweeper;
 
 public record Number(int Value) : ICell
 {
