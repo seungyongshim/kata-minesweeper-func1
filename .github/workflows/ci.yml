@@ -37,7 +37,7 @@ jobs:
         sleep 2s
         dotnet test --collect:"XPlat Code Coverage"
     - name: ReportGenerator
-      uses: danielpalme/ReportGenerator-GitHub-Action@4.8.4
+      uses: danielpalme/ReportGenerator-GitHub-Action@5.1.0
       with:
         reports: '**/coverage.cobertura.xml'
         targetdir: 'docs' # REQUIRED # The directory where the generated report should be saved.
