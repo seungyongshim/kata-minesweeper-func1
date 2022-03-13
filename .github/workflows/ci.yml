@@ -21,13 +21,6 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 6.0.x
-    - name: Add Nuget
-      run: |
-        cd src
-        for proj in $(dotnet sln list | grep Tests)        
-        do
-          dotnet add "$proj" package JunitXml.TestLogger || true
-        done
     - name: Test
       run: |	  
         cd src	
