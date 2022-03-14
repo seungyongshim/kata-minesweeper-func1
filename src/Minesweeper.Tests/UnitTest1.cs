@@ -36,4 +36,7 @@ public class CellSpec
     {
         show(one).Should().Be("1");
     }
+
+    [Fact]
+    public void OnePlus() => plus(one).Should().BeOfType<Two>();
 }

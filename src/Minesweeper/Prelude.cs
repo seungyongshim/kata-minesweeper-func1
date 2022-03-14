@@ -25,17 +25,16 @@ public static class Prelude
         _ => cell
     };
 
-    public static Bomb bomb { get; private set; } = new Bomb();
-    public static Zero zero { get; private set; } = new Zero();
-    public static One one { get; private set; } = new One();
-    public static Two two { get; private set; } = new Two();
-    public static Three three { get; private set; } = new Three();
-    public static Four four { get; private set; } = new Four();
-    public static Five five { get; private set; } = new Five();
-    public static Six six { get; private set; } = new Six();
-    public static Seven seven { get; private set; } = new Seven();
-    public static Eight eight { get; private set; } = new Eight();
-
+    public static Bomb bomb { get; } = new();
+    public static Zero zero { get; } = new();
+    public static One one { get; } = new();
+    public static Two two { get; } = new();
+    public static Three three { get; } = new();
+    public static Four four { get; } = new();
+    public static Five five { get; } = new();
+    public static Six six { get; } = new();
+    public static Seven seven { get; } = new();
+    public static Eight eight { get; } = new();
 
     public static string show(ICell cell) => cell switch
     {
@@ -53,7 +52,7 @@ public static class Prelude
     };
 
     public static Func<Width, Func<Height, MineField>> newMineField { get; private set; } =
-        width => height => 
+        width => height =>
             new MineField(width, height, Enumerable.Repeat<ICell>(zero, width.Value * height.Value).ToArr());
 
     public static Option<int> index1D(X x, Y y, MineField @this) => (x.Value, y.Value) switch
@@ -64,9 +63,6 @@ public static class Prelude
         (_, var a) when a >= @this.Height.Value => None,
         (var a, var b) => Some(b + a * @this.Width.Value)
     };
-
-    public static Func<Bomb> newBomb { get; private set; } =
-        () => new();
 
     public static Func<MineField, Func<X, Func<Y, Func<Func<ICell, ICell>, MineField>>>> ReplaceItem { get; private set; } =
         @this => x => y => hof =>
