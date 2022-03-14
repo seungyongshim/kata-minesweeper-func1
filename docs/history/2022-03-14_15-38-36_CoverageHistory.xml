@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<coverage version="1.0" date="2022-03-14_15-38-36" tag="26_1981553485">
+  <assembly name="Minesweeper">
+    <class name="Minesweeper.Domain.Covered" coveredlines="1" coverablelines="1" totallines="5" coveredbranches="0" totalbranches="0" coveredcodeelements="1" totalcodeelements="1" />
+    <class name="Minesweeper.Domain.Height" coveredlines="2" coverablelines="2" totallines="7" coveredbranches="0" totalbranches="0" coveredcodeelements="2" totalcodeelements="2" />
+    <class name="Minesweeper.Domain.MineField" coveredlines="3" coverablelines="3" totallines="7" coveredbranches="0" totalbranches="0" coveredcodeelements="3" totalcodeelements="3" />
+    <class name="Minesweeper.Domain.Width" coveredlines="2" coverablelines="2" totallines="7" coveredbranches="0" totalbranches="0" coveredcodeelements="2" totalcodeelements="2" />
+    <class name="Minesweeper.Domain.X" coveredlines="2" coverablelines="3" totallines="9" coveredbranches="0" totalbranches="0" coveredcodeelements="2" totalcodeelements="3" />
+    <class name="Minesweeper.Domain.Y" coveredlines="2" coverablelines="3" totallines="9" coveredbranches="0" totalbranches="0" coveredcodeelements="2" totalcodeelements="3" />
+    <class name="Minesweeper.Prelude" coveredlines="57" coverablelines="73" totallines="94" coveredbranches="43" totalbranches="56" coveredcodeelements="17" totalcodeelements="18" />
+  </assembly>
+</coverage>
