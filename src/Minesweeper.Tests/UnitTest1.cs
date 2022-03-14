@@ -1,5 +1,6 @@
 using AutoFixture.Xunit2;
 using FluentAssertions;
+using Minesweeper.Domain;
 using Xunit;
 using static Minesweeper.Prelude;
 
@@ -10,13 +11,13 @@ public class CellSpec
     [Theory, AutoMoqData]
     public void Covered(Covered cell)
     {
-        toString(cell).Should().Be(".");
+        show(cell).Should().Be(".");
     }
 
     [Fact]
     public void Clicked()
     {
-        var cell = new Covered(new One());
+        var cell = new Covered(one);
         var ret = click(cell);
 
         ret.Should().BeOfType<One>();
@@ -25,14 +26,14 @@ public class CellSpec
     [Fact]
     public void CreateMineField()
     {
-        var sut = createMineField(3, 3);
+        var sut = newMineField(3)(3);
 
         sut.Cells.Count.Should().Be(9);
     }
 
-    [Theory, AutoData]
-    public void OneToString(One sut)
+    [Fact]
+    public void ShowOne()
     {
-        toString(sut).Should().Be("1");
+        show(one).Should().Be("1");
     }
 }

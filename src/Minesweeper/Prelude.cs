@@ -1,9 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using LanguageExt;
+using Minesweeper.Domain;
+using static LanguageExt.Prelude;
 
 namespace Minesweeper;
 
@@ -15,7 +12,30 @@ public static class Prelude
         _ => cell
     };
 
-    public static string toString(ICell cell) => cell switch
+    public static ICell plus(ICell cell) => cell switch
+    {
+        Zero => one,
+        One => two,
+        Two => three,
+        Three => four,
+        Four => five,
+        Five => six,
+        Six => seven,
+        Seven => eight,
+        _ => cell
+    };
+
+    public static One one { get; private set; } = new One();
+    public static Two two { get; private set; } = new Two();
+    public static Three three { get; private set; } = new Three();
+    public static Four four { get; private set; } = new Four();
+    public static Five five { get; private set; } = new Five();
+    public static Six six { get; private set; } = new Six();
+    public static Seven seven { get; private set; } = new Seven();
+    public static Eight eight { get; private set; } = new Eight();
+
+
+    public static string show(ICell cell) => cell switch
     {
         Covered => ".",
         Zero => " ",
@@ -30,37 +50,27 @@ public static class Prelude
         Bomb => "*",
     };
 
-    public static MineField createMineField(int width, int height) =>
-        new MineField(width, height, new Lst<ICell> (Enumerable.Repeat(new Zero(), width * height)));
+    public static Func<Width, Func<Height, MineField>> newMineField { get; private set; } =
+        width => height => 
+            new MineField(width, height, new Arr<ICell>(Enumerable.Repeat(new Zero(), width.Value * height.Value)));
 
-    public static int index1D(X x, Y y, MineField @this) =>
-        x.Value + (y.Value * @this.Width.Value);
-
-    public static MineField setBomb(X x, Y y, MineField @this) => @this[y, x].Case switch
+    public static Option<int> index1D(X x, Y y, MineField @this) => (x.Value, y.Value) switch
     {
-        Bomb => @this,
-        null => @this,
-        _ => @this with { Cells = @this.Cells.SetItem(index1D(x, y, @this), new Bomb()) }
+        ( < 0, _) => None,
+        (_, < 0) => None,
+        (var a, _) when a >= @this.Width.Value => None,
+        (_, var a) when a >= @this.Height.Value => None,
+        (var a, var b) => Some(b + a * @this.Width.Value)
     };
-}
 
-public record Width(int Value)
-{
-    public static implicit operator Width(int v) => new(v);
-}
+    public static Func<Bomb> newBomb { get; private set; } =
+        () => new();
 
-public record Height(int Value)
-{
-    public static implicit operator Height(int v) => new(v);
-}
-
-public record X(int Value)
-{
-    public static implicit operator X(int v) => new(v);
-}
-
-public record Y(int Value)
-{
-    public static implicit operator Y(int v) => new(v);
+    public static Func<MineField, Func<X, Func<Y, Func<Func<ICell, ICell>, MineField>>>> ReplaceItem { get; private set; } =
+        @this => x => y => hof =>
+            index1D(x, y, @this).Match(r => @this with
+            {
+                Cells = @this.Cells.SetItem(r, hof(@this.Cells[r]))
+            }, () => @this);
 }
 
