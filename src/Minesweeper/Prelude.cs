@@ -64,11 +64,31 @@ public static class Prelude
         (var a, var b) => Some(b + a * @this.Width.Value)
     };
 
+    public static Func<MineField, Func<X, Func<Y, IEnumerable<int>>>> indexesNear =>
+        @this => x => y =>
+            from _1 in new List<(X X, Y Y)>
+            {
+                (-1, -1), (0, -1), (1, -1),
+                (-1, 0), (1, 0),
+                (-1, 1), (0, 1), (1, 1),
+            }
+            let _2 = (_1.X + x, _1.Y + y)
+            let _3 = index1D(_2.Item1, _2.Item2, @this)
+            where _3 != None
+            select _3.Match(v => v, () => default);
+
+
     public static Func<MineField, Func<X, Func<Y, Func<Func<ICell, ICell>, MineField>>>> ReplaceItem { get; private set; } =
         @this => x => y => hof =>
-            index1D(x, y, @this).Match(r => @this with
+            index1D(x, y, @this).Case switch
             {
-                Cells = @this.Cells.SetItem(r, hof(@this.Cells[r]))
-            }, () => @this);
+                null => @this,
+                int v => @this with
+                {
+                    Cells = @this.Cells.SetItem(v, hof(@this.Cells[v]))
+                }
+            };
+    
+    
 }
 

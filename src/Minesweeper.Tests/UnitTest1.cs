@@ -39,11 +39,13 @@ public class CellSpec
         show(six).Should().Be("6");
         show(seven).Should().Be("7");
         show(eight).Should().Be("8");
+        show(bomb).Should().Be("*");
     }
 
     [Fact]
     public void PlusSuccess()
     {
+        plus(zero).Should().BeOfType<One>();
         plus(one).Should().BeOfType<Two>();
         plus(two).Should().BeOfType<Three>();
         plus(three).Should().BeOfType<Four>();
