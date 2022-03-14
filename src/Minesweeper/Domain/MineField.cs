@@ -2,4 +2,4 @@ using LanguageExt;
 
 namespace Minesweeper.Domain;
 
-public record MineField(Width Width, Height Height, Arr<ICell> Cells);
+public readonly record struct MineField(Width Width, Height Height, Arr<ICell> Cells);

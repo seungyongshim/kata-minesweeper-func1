@@ -2,4 +2,4 @@ using LanguageExt;
 
 namespace Minesweeper.Domain;
 
-public record Covered(ICell Inner = default) : ICell;
+public readonly record struct Covered(ICell Inner = default) : ICell;

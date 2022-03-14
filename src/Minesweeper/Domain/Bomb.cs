@@ -1,3 +1,3 @@
 namespace Minesweeper.Domain;
 
-public record Bomb : ICell;
+public readonly record struct Bomb : ICell;

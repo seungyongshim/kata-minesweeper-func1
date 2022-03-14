@@ -1,6 +1,6 @@
-﻿namespace Minesweeper.Domain;
+namespace Minesweeper.Domain;
 
-public record Width(int Value)
+public readonly record struct Width(int Value)
 {
     public static implicit operator Width(int v) => new(v);
 }

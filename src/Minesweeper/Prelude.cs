@@ -25,6 +25,8 @@ public static class Prelude
         _ => cell
     };
 
+    public static Bomb bomb { get; private set; } = new Bomb();
+    public static Zero zero { get; private set; } = new Zero();
     public static One one { get; private set; } = new One();
     public static Two two { get; private set; } = new Two();
     public static Three three { get; private set; } = new Three();
@@ -52,7 +54,7 @@ public static class Prelude
 
     public static Func<Width, Func<Height, MineField>> newMineField { get; private set; } =
         width => height => 
-            new MineField(width, height, new Arr<ICell>(Enumerable.Repeat(new Zero(), width.Value * height.Value)));
+            new MineField(width, height, Enumerable.Repeat<ICell>(zero, width.Value * height.Value).ToArr());
 
     public static Option<int> index1D(X x, Y y, MineField @this) => (x.Value, y.Value) switch
     {

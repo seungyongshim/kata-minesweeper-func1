@@ -1,3 +1,3 @@
 namespace Minesweeper.Domain;
 
-public record Zero : ICell;
+public readonly record struct Zero : ICell;

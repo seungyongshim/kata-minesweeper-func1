@@ -1,6 +1,6 @@
-﻿namespace Minesweeper.Domain;
+namespace Minesweeper.Domain;
 
-public record X(int Value)
+public readonly record struct X(int Value)
 {
     public static implicit operator X(int v) => new(v);
 }
