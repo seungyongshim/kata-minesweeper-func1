@@ -8,18 +8,13 @@ namespace Minesweeper.Tests;
 
 public class CellSpec
 {
-    [Theory, AutoMoqData]
-    public void Covered(Covered cell)
-    {
-        show(cell).Should().Be(".");
-    }
-
     [Fact]
     public void Clicked()
     {
         var cell = new Covered(one);
-        var ret = click(cell);
+        show(cell).Should().Be(".");
 
+        var ret = click(cell);
         ret.Should().BeOfType<One>();
     }
 
@@ -27,16 +22,36 @@ public class CellSpec
     public void CreateMineField()
     {
         var sut = newMineField(3)(3);
-
         sut.Cells.Count.Should().Be(9);
+
+        var sut2 = ReplaceItem(sut)(1)(1)(x => bomb);
+        sut2.Cells.Count(x => x is Bomb).Should().Be(1);
     }
 
     [Fact]
-    public void ShowOne()
+    public void ShowSuccess()
     {
         show(one).Should().Be("1");
+        show(two).Should().Be("2");
+        show(three).Should().Be("3");
+        show(four).Should().Be("4");
+        show(five).Should().Be("5");
+        show(six).Should().Be("6");
+        show(seven).Should().Be("7");
+        show(eight).Should().Be("8");
     }
 
     [Fact]
-    public void OnePlus() => plus(one).Should().BeOfType<Two>();
+    public void PlusSuccess()
+    {
+        plus(one).Should().BeOfType<Two>();
+        plus(two).Should().BeOfType<Three>();
+        plus(three).Should().BeOfType<Four>();
+        plus(four).Should().BeOfType<Five>();
+        plus(five).Should().BeOfType<Six>();
+        plus(six).Should().BeOfType<Seven>();
+        plus(seven).Should().BeOfType<Eight>();
+        plus(eight).Should().BeOfType<Eight>();
+        plus(bomb).Should().BeOfType<Bomb>();
+    }
 }
